@@ -7,17 +7,17 @@ import sys
 print('hi,administrator.')
 print('''Lite OS 1.00
     help,creating,lisence''')
-sys_cmd_dict={'update software list':'pip list -o',"clear":'cls',"installed software list":'pip list',"market help":'pip',"shutdown":"shutdown -s -t 60",'restart':'shutdown -r -t 60',"running python":'python'}
-sys_cmd_code_dict={'install':0,'update':1,'uninstall':2,'play':3,'find':4,'run':5,'exit':6,'clear':7}
+sys_cmd_dict={'update software list':'pip list -o',"clear":'cls',"installed software list":'pip list',"market help":'pip',"shutdown":"shutdown -s -t 60",'restart':'shutdown -r -t 60',"running python":'python','running mysql':'mysql'}
+sys_cmd_application_code_dict={'install':0,'update':1,'uninstall':2,'play':3,'find':4,'run':5,'exit':6,'clear':7,'time':8,'send bytes':9,'calculator':10,'recoder':11,'open':12}
 while 1:
     sys_termail_input=input("@admin@: >>> ")
     try:
         sys_cmd_run_code=sys_cmd_dict[sys_termail_input]
     except KeyError:
         try:
-            sys_cmd_run_code=sys_cmd_code_dict[sys_termail_input]       
+            sys_cmd_run_code=sys_cmd_application_code_dict[sys_termail_input]       
         except KeyError:
-            print('Sorry,You wrote is wrong.Please enter again')
+            print('Sorry,I do not know what you entered.Please enter again.Thanks.')
         else:
             if sys_cmd_run_code == 0:
                 install_pak=input('install software name: ')
@@ -67,6 +67,46 @@ while 1:
                 except ModuleNotFoundError:
                     print('Sorry,We can not find the software.Please install os')
                 else:
-                    os.system('cls')              
+                    os.system('cls')
+            if sys_cmd_run_code == 8:
+                try:
+                    import datetime
+                except ModuleNotFoundError:
+                    print('Sorry,We can not find the software.Please install datetime')
+                else:
+                    now_time=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                    print('{first}'.format(first=now_time))  
+            if sys_cmd_run_code == 9:
+                try:
+                    import os
+                except ModuleNotFoundError:
+                    print('Sorry,We can not find the software.Please install os')
+                else:
+                    send_computer=input('send computer ip : ')
+                    send_bytes=input('bytes : ')
+                    send_time=int(input('send times : '))
+                    os.system('ping ip {first} -| {second} -n {third}'.format(first=send_computer,second=send_bytes,third=send_time))
+            if sys_cmd_run_code == 10:
+                try:
+                    import os
+                except ModuleNotFoundError:
+                    print('Sorry,We can not find the software.Please install os')
+                else: 
+                    os.system('calc')
+            if sys_cmd_run_code == 11:
+                try:
+                    import os
+                except ModuleNotFoundError:
+                    print('Sorry,We can not find the software.Please install os')
+                else:
+                    os.system('sndrec32')
+            if sys_cmd_run_code == 12:
+                try:
+                    import os
+                except ModuleNotFoundError:
+                    print('Sorry,We can not find the software.Please install os')
+                else:
+                    open_path=input(' open_path : ')
+                    os.system('{first}'.format(first=open_path))                                               
     else:
         os.system(sys_cmd_run_code)
